@@ -77,28 +77,26 @@ public:
     }
 };
 
-class Laptop {
+class Laptop 
+{
 private:
     Camera* camera;
     Mouse* mouse;
-    Motherboard* motherboard;
-    GraphicsCard* graphicsCard;
-    Touchpad* touchpad;
 
 public:
-    Laptop(Camera* cam, Mouse* m, Motherboard* mb, GraphicsCard* gc, Touchpad* tp)
-        : camera(cam), mouse(m), motherboard(mb), graphicsCard(gc), touchpad(tp) {}
+    Laptop(Camera* cam, Mouse* m)
+        : camera(cam), mouse(m)
+    {}
 
-    void Show() {
+    void Show() 
+    {
         cout << "Laptop : " << endl;
         camera->Show();
         mouse->Show();
-        motherboard->Show();
-        graphicsCard->Show();
-        touchpad->Show();
     }
-};
 
+    ~Laptop() {}
+};
 int main() {
     Camera myCamera("Sony");
     Mouse myMouse("Raizer");
