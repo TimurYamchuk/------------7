@@ -3,117 +3,75 @@
 
 using namespace std;
 
-class Keyboard {
-public:
-    Keyboard() {}
-    ~Keyboard() {}
-};
-
-class Processor {
-public:
-    Processor() {}
-    ~Processor() {}
-};
-
-class Screen {
-private:
-    double size;
+class Transport {
+protected:
+    string fuelType;
 
 public:
-    Screen() {}
-    ~Screen() {}
-};
+    Transport(const string& fuel) : fuelType(fuel) {}
 
-class Camera {
-private:
-    string brand;
-
-public:
-    Camera(const string& brand) : brand(brand) {}
-
-    void Show() {
-        cout << "Camera : " << brand << endl;
+    virtual void PrintInfo() {
+        cout << "Fuel Type: " << fuelType << endl;
     }
-
-    ~Camera() {}
 };
 
-class Mouse {
-private:
-    string brand;
-
+class Car : public Transport {
 public:
-    Mouse(const string& brand) : brand(brand) {}
+    Car() : Transport("Gasoline") {}
 
-    void Show() {
-        cout << "Mouse : " << brand << endl;
+    void PrintInfo() override {
+        cout << "Car" << endl;
+        Transport::PrintInfo();
     }
-
-    ~Mouse() {}
 };
 
-class Motherboard {
-private:
-    string brand;
-
+class Ship : public Transport {
 public:
-    Motherboard() {}
+    Ship() : Transport("Diesel") {}
 
-    ~Motherboard() {}
+    void PrintInfo() override {
+        cout << "Ship" << endl;
+        Transport::PrintInfo();
+    }
 };
 
-class GraphicsCard {
-private:
-    string brand;
-
+class Airplane : public Transport {
 public:
-    GraphicsCard() {}
+    Airplane() : Transport("Jet Fuel") {}
 
-    ~GraphicsCard() {}
+    void PrintInfo() override {
+        cout << "Airplane" << endl;
+        Transport::PrintInfo();
+    }
 };
 
-class Touchpad {
-private:
-    string brand;
-
+class Tram : public Transport {
 public:
-    Touchpad() {}
-    
-    ~Touchpad() {}
+    Tram() : Transport("Electricity") {}
+
+    void PrintInfo() override {
+        cout << "Tram" << endl;
+        Transport::PrintInfo();
+    }
 };
 
-class Laptop {
-private:
-    Keyboard keyboard;
-    Processor processor;
-    Screen screen;
-    Camera* camera;
-    Mouse* mouse;
-    Motherboard motherboard;
-    GraphicsCard graphicsCard;
-    Touchpad touchpad;
-
+class Motorcycle : public Transport {
 public:
-    Laptop(const string& camBrand, const string& mouseBrand, const string& mbBrand, const string& gcBrand, const string& tpBrand)
-        : camera(camBrand), mouse(mouseBrand), motherboard(mbBrand), graphicsCard(gcBrand), touchpad(tpBrand) 
-    {}
+    Motorcycle() : Transport("Gasoline") {}
 
-    void Show() {
-        cout << "Laptop : " << endl;
-        camera.Show();
-        mouse.Show();
-        motherboard.Show();
-        graphicsCard.Show();
-        touchpad.Show();
+    void PrintInfo() override {
+        cout << "Motorcycle" << endl;
+        Transport::PrintInfo();
     }
 };
 
 int main() {
-    Laptop myNotebook("Sony", "Bloody", "Asus", "Nvidia", "Xaomi");
-    myNotebook.Show();
+    Transport* vehicles[] = {new Car(), new Ship(), new Airplane(), new Tram(), new Motorcycle()};
 
-    Laptop newNotebook("Canon", "Logitech", "MSI", "AMD", "Samsung");
-    newNotebook.Show();
+    for (int i = 0; i < 5; i++) {
+        vehicles[i]->PrintInfo();
+        delete vehicles[i];
+    }
 
     return 0;
 }
