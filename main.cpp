@@ -3,134 +3,92 @@
 
 using namespace std;
 
-class Keyboard // композиция
-{
+class Keyboard {
 public:
-    Keyboard()
-    {}
-
-    ~Keyboard()
-    {}
+    Keyboard() {}
+    ~Keyboard() {}
 };
 
-class Processor // композиция
-{
-
+class Processor {
 public:
-    Processor()
-    {}
-
-    ~Processor()
-    {}
+    Processor() {}
+    ~Processor() {}
 };
 
-class Screen // композиция
-{
+class Screen {
 private:
     double size;
 
 public:
-    Screen()
-    {}
-
-    ~Screen()
-    {}
+    Screen() {}
+    ~Screen() {}
 };
 
-class Camera // агрегация
-{
+class Camera {
 private:
     string brand;
 
 public:
-    Camera(const string& brand) : brand(brand) 
-    {}
+    Camera(const string& brand) : brand(brand) {}
 
-    void Show() 
-    {
+    void Show() {
         cout << "Camera : " << brand << endl;
     }
 
-    ~Camera()
-    {}
+    ~Camera() {}
 };
 
-class Mouse // агрегация
-{
+class Mouse {
 private:
     string brand;
 
 public:
-    Mouse(const string& brand) : brand(brand) 
-    {}
+    Mouse(const string& brand) : brand(brand) {}
 
-    void Show()
-    {
+    void Show() {
         cout << "Mouse : " << brand << endl;
     }
 
     ~Mouse() {}
 };
 
-class Motherboard // композиция
-{
+class Motherboard {
 private:
     string brand;
 
 public:
-    Motherboard(const string& brand) : brand(brand) 
-    {}
-
-    void Show()
-    {
-        cout << "Motherboard : " << brand << endl;
-    }
+    Motherboard() {}
 
     ~Motherboard() {}
 };
 
-class GraphicsCard // композиция
-{
+class GraphicsCard {
 private:
     string brand;
 
 public:
-    GraphicsCard(const string& brand) : brand(brand) 
-    {}
-
-    void Show() 
-    {
-        cout << "Graphics Card : " << brand << endl;
-    }
+    GraphicsCard() {}
 
     ~GraphicsCard() {}
 };
 
-class Touchpad // композиция
-{
+class Touchpad {
 private:
     string brand;
 
 public:
-    Touchpad(const string& brand) : brand(brand) 
-    {}
-
-    void Show()
-    {
-        cout << "Touchpad : " << brand << endl;
-    }
-
+    Touchpad() {}
+    
     ~Touchpad() {}
 };
 
-class Laptop 
-{
+class Laptop {
 private:
     Keyboard keyboard;
     Processor processor;
     Screen screen;
-    Camera camera;
-    Mouse mouse;
+    Camera* camera;
+    Mouse* mouse;
     Motherboard motherboard;
     GraphicsCard graphicsCard;
     Touchpad touchpad;
@@ -140,8 +98,7 @@ public:
         : camera(camBrand), mouse(mouseBrand), motherboard(mbBrand), graphicsCard(gcBrand), touchpad(tpBrand) 
     {}
 
-    void Show() 
-    {
+    void Show() {
         cout << "Laptop : " << endl;
         camera.Show();
         mouse.Show();
@@ -151,8 +108,7 @@ public:
     }
 };
 
-int main() 
-{
+int main() {
     Laptop myNotebook("Sony", "Bloody", "Asus", "Nvidia", "Xaomi");
     myNotebook.Show();
 
